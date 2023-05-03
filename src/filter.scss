@@ -1,0 +1,8 @@
+.filter {
+  &-option {
+    &:not(.parent) {
+      // position: relative;
+      padding-left: 100px;
+    }
+  }
+}

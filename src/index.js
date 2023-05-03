@@ -1,13 +1,44 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import Index from './admin';
+import Products from './admin/Products';
+import ProductEdit from './admin/ProductEdit';
+import UserIndex from './user';
 import reportWebVitals from './reportWebVitals';
+import ReactDOM from 'react-dom/client';
+import './App.scss';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import store from './store/saga.root';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Provider } from 'react-redux';
+import NavWrapper from './components/nav';
+const router = createBrowserRouter([
+  {
+    path: "/admin",
+    element: <NavWrapper><Index /></NavWrapper>,
+  },
+  {
+    path: "/product",
+    element: <NavWrapper><Products /></NavWrapper>,
+  },
+  {
+    path: "/product/edit/:id?",
+    element: <NavWrapper><ProductEdit /></NavWrapper>,
+  },
+  {
+    path: "/",
+    element: <NavWrapper><UserIndex /></NavWrapper>,
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
 
