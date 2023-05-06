@@ -2,7 +2,8 @@ import { handleActions } from "redux-actions";
 
 const status = {
   modal: false,
-  modalData: null
+  modalData: null,
+  basket: []
 };
 
 const initialState = { ...status };

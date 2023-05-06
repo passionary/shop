@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 function Products ({}: any) {
   return <>
     <h1>Products</h1>
-    <a href="/product/edit">Добавить товар</a>
+      <a href="/product/edit">Добавить товар</a>
     <div className="filter">
-
+      
     </div>
     <div className="product__list">
 
