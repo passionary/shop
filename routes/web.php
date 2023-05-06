@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::post('/get-session', function () {
+    return "HELLO, WORLD!";
+});
+Route::get('/', function() {
     return view('welcome');
 });
+
+Route::post('/session-start', 'AppController@session');
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
