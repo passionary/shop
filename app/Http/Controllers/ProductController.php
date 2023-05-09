@@ -31,11 +31,11 @@ class ProductController extends Controller
             'message' => 'Товар удален успешно!'
         ]);
     }
-    public function edit(Product $product = null, Request $request)
+    public function edit(Product $product, Request $request)
     {
         $validator = \Validator::make($request->all(), [
             'parent_id' => "required",
-            'name' => "required|unique:products",
+            'name' => "required|unique:products,name," . (($product->id) ? $product->id : 'NULL'),
             'price' => "required",
         ]);
         $response = [];
