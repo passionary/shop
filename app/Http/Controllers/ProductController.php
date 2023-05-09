@@ -23,20 +23,40 @@ class ProductController extends Controller
     {
         return response()->json($product);
     }
-    public function edit(Product $product = null, Request $request)
+    public function delete(Product $product)
     {
-        $message = 'Товар создан успешно';
-
-        if(isset($product->id)) {
-            $message = 'Товар редактирован успешно';
-            $product->update($request->all());
-        }
-        else {
-            Product::create($request->all());
-        }
+        $product->delete();
 
         return response()->json([
-            'message' => $message
+            'message' => 'Товар удален успешно!'
         ]);
+    }
+    public function edit(Product $product = null, Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'parent_id' => "required",
+            'name' => "required|unique:products",
+            'price' => "required",
+        ]);
+        $response = [];
+
+        if($validator->fails()) {
+            foreach($validator->errors()->messages() as $key => $value) {
+                $response['errors'][] = $value;
+            }
+        }
+        else {
+            $response['message'] = 'Товар создан успешно';
+
+            if(isset($product->id)) {
+                $response['message'] = 'Товар редактирован успешно';
+                $product->update($request->all());
+            }
+            else {
+                Product::create($request->all());
+            }
+        }
+
+        return response()->json($response);
     }
 }
