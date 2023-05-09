@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { TreeSelect } from 'antd';
 import axios from "axios";
 
-function Products({ }: any) {
+function Products({ setApp }: any) {
   const [categories, setCategories] = useState([]);
   const [value, setValue] = useState<string>('');
   const [name, setName] = useState<string>('');
@@ -25,6 +25,21 @@ function Products({ }: any) {
     axios.post(url, new FormData(form))
     .then(res => {
       console.log(res.data, 'PRODUCTS RESPONSE');
+
+      if (!res.data.errors) {
+        setApp({ 
+          message: res.data.message, 
+          messageStatus: 'Message',
+        });
+      }
+      else {
+        const error = res.data.errors[0] || 'Some went wrong';
+
+        setApp({
+          message: error, 
+          messageStatus: 'ERROR' 
+        });
+      }
     })
   }
   const title = id ? "Редактирование товара" : "Создание товара";

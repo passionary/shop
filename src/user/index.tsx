@@ -13,15 +13,6 @@ function Products({}: any) {
     setProducts(array);
   }
   useEffect(() => {
-    axios.post('http://127.0.0.1:8000/session-start')
-      .then((res: any) => {
-        console.log(res.data, 'SESSION START RESPONSE');
-        axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-        console.log(document.head.querySelector('meta[name="csrf-token"]'), 'token');
-
-        axios.defaults.headers.common['X-CSRF-TOKEN'] = res.data.token;
-        axios.defaults.headers.get['Accepts'] = 'application/json';
-      })
     axios.post('http://127.0.0.1:8000/api/products')
       .then((res: any) => {
         console.log(res, 'PRODUCT LIST COMPONENT RESPONSE');

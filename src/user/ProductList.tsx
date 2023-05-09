@@ -29,7 +29,7 @@ function Products({ products, basket, setApp }: any) {
         } = payload;
         basket = basketArray || [];
         
-        if(basket.length) {
+        if(basket) {
           basket = basket.concat(product.id);
           payload = { basket }
         }

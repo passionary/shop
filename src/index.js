@@ -16,6 +16,7 @@ import { Provider } from 'react-redux';
 import NavWrapper from './components/nav';
 import BasketWrapper from './components/BasketWrapper';
 import Basket from './user/Basket';
+import Toast from './components/Toast';
 
 const router = createBrowserRouter([
   {
@@ -32,21 +33,21 @@ const router = createBrowserRouter([
   },
   {
     path: "/cart",
-    element: 
-    <NavWrapper>
-      <BasketWrapper>
-        <Basket />
-      </BasketWrapper>
-    </NavWrapper>,
+    element:
+      <NavWrapper>
+        <BasketWrapper>
+          <Basket />
+        </BasketWrapper>
+      </NavWrapper>,
   },
   {
     path: "/",
-    element: 
-    <NavWrapper>
-      <BasketWrapper>
-        <UserIndex />
-      </BasketWrapper>
-    </NavWrapper>,
+    element:
+      <NavWrapper>
+        <BasketWrapper>
+          <UserIndex />
+        </BasketWrapper>
+      </NavWrapper>,
   },
 ]);
 
@@ -54,7 +55,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <Toast>
+        <RouterProvider router={router} />
+      </Toast>
     </Provider>
   </React.StrictMode>
 );

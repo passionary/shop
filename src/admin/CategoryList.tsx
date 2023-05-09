@@ -33,9 +33,6 @@ function CategoryList({
       name
     })
       .then(res => {
-        setApp({
-          modal: false,
-        })
         if (category) {
           callbackHandler.current({
             ...category,
@@ -48,6 +45,11 @@ function CategoryList({
         else {
           addRootCategory(res.data);
         }
+        setApp({
+          modal: false,
+          message: 'Категория добавлена успешно!',
+          messageStatus: 'Message'
+        })
       });
   }
   const removeCategoryHandler = (category: any, parent: any) => {
@@ -56,10 +58,6 @@ function CategoryList({
 
     axios.post(url)
       .then(res => {
-        setApp({
-          modal: false,
-        })
-
         if (category.parent_id) {
           callbackHandler.current({
             ...parent,
@@ -69,6 +67,12 @@ function CategoryList({
         else {
           removeRootCategory(category);
         }
+
+        setApp({
+          modal: false,
+          message: res.data.message,
+          messageStatus: 'Message'
+        })
       })
   }
   const renderCategoryList = () => {
