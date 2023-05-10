@@ -3,7 +3,7 @@ import { setApp } from "../store/app/app.actions";
 import { connect } from "react-redux";
 import Filter from "../components/Filter";
 import ProductList from "./ProductList";
-import axios from "axios";
+import axios from "@/axios";
 
 function Products({}: any) {
   const [products, setProducts] = useState([]);
@@ -13,7 +13,7 @@ function Products({}: any) {
     setProducts(array);
   }
   useEffect(() => {
-    axios.post('http://127.0.0.1:8000/api/products')
+    axios.post('products')
       .then((res: any) => {
         console.log(res, 'PRODUCT LIST COMPONENT RESPONSE');
         setProducts(res.data);

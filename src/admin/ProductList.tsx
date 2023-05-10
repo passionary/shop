@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { setApp } from "../store/app/app.actions";
 import { connect } from "react-redux";
-import axios from "axios";
+import axios from "@/axios";
 
 function ProductList({ setApp, callback }: any) {
   const [products, setProducts] = useState([]);
   const removeProductHandler = (product: any) => {
     const { id } = product;
-    let url = `http://127.0.0.1:8000/api/products/delete/${id}`;
+    let url = `products/delete/${id}`;
 
     axios.post(url)
     .then(res => {
@@ -22,7 +22,7 @@ function ProductList({ setApp, callback }: any) {
   }
   const removeProduct = (event: React.MouseEvent<HTMLAnchorElement>, product: any) => {
     event.preventDefault();
-    
+
     setApp({
       modal: 'delete-product',
       modalText: `Удаление товара "${product.name}"`,
@@ -32,7 +32,7 @@ function ProductList({ setApp, callback }: any) {
   useEffect(() => {
     callback(removeProductHandler);
 
-    axios.post('http://127.0.0.1:8000/api/products')
+    axios.post('products')
       .then((res: any) => {
         setProducts(res.data);
         console.log(res, 'TREE RESPONSE');

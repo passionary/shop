@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import Cookies from 'universal-cookie';
 import * as jose from 'jose';
 import { connect } from "react-redux";

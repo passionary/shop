@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { setApp } from "../store/app/app.actions";
 import { connect } from "react-redux";
-import axios from "axios";
 import * as jose from 'jose';
 import Cookies from "universal-cookie";
 

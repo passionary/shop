@@ -3,7 +3,7 @@ import { setApp } from "../store/app/app.actions";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { TreeSelect } from 'antd';
-import axios from "axios";
+import axios from "@/axios";
 
 function Products({ setApp }: any) {
   const [categories, setCategories] = useState([]);
@@ -16,7 +16,7 @@ function Products({ setApp }: any) {
   const { id } = useParams();
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    let url = 'http://127.0.0.1:8000/api/products/edit';
+    let url = 'products/edit';
     
     if(id) {
       url += `/${id}`;
@@ -46,7 +46,7 @@ function Products({ setApp }: any) {
 
   useEffect(() => {
     if(id) {
-      axios.post('http://127.0.0.1:8000/api/products/get/' + id)
+      axios.post('products/get/' + id)
       .then(({ data }: any) => {
         console.log(data, 'PRODUCT GET RESPONSE');
         setName(data.name);
@@ -54,7 +54,7 @@ function Products({ setApp }: any) {
         setValue(data.parent_id);
       })
     }
-    axios.post('http://127.0.0.1:8000/api/categories/tree')
+    axios.post('categories/tree')
       .then((res: any) => {
         console.log(res, 'TREE RESPONSE');
         setCategories(res.data.items);

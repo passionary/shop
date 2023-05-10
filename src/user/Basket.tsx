@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import axios from "@/axios";
 import { connect } from "react-redux";
 import Cookies from "universal-cookie";
 import { setApp } from "../store/app/app.actions";
@@ -27,7 +27,7 @@ function Basket({ basket, message, setApp }: any) {
       }
     });
 
-    const response = await axios.post('http://127.0.0.1:8000/api/products/get', {
+    const response = await axios.post('products/get', {
       products: array
     })
     console.log(response, 'PRODUCT GET RESPONSE');
@@ -53,7 +53,7 @@ function Basket({ basket, message, setApp }: any) {
     event.preventDefault();
     const form = document.getElementById('basket-form');
 
-    axios.post('http://127.0.0.1:8000/api/order/create', form)
+    axios.post('order/create', form)
       .then(res => {
         console.log(res.data, 'PURCHASE RESPONSE');
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import FilterOption from "./FilterOption";
-import axios from "axios";
+import axios from "@/axios";
 
 export default function ({ setProducts }: any) {
   const [categories, setCategories] = useState<any>(null);
   
   useEffect(() => {
-    axios.post('http://127.0.0.1:8000/api/categories/tree')
+    axios.post('categories/tree')
       .then((res: any) => {
         console.log(res, 'FILTER COMPONENT RESPONSE');
         setCategories(res.data.items);

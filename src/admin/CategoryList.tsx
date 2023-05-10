@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Category from './Category';
-import axios from 'axios';
+import axios from '@/axios';
 import { connect } from 'react-redux';
 import { setApp } from '../store/app/app.actions';
 
@@ -23,7 +23,7 @@ function CategoryList({
     if (!name) return;
 
     const { id } = category || {};
-    let url = 'http://127.0.0.1:8000/api/categories/add';
+    let url = 'categories/add';
 
     if (id) {
       url += `/${id}`;
@@ -54,7 +54,7 @@ function CategoryList({
   }
   const removeCategoryHandler = (category: any, parent: any) => {
     const { id } = category;
-    let url = `http://127.0.0.1:8000/api/categories/delete/${id}`;
+    let url = `categories/delete/${id}`;
 
     axios.post(url)
       .then(res => {
@@ -91,7 +91,7 @@ function CategoryList({
   }
 
   const loadCategories = () => {
-    axios.post('http://127.0.0.1:8000/api/categories')
+    axios.post('categories')
       .then(res => {
         setCategories(res.data.items);
       })
