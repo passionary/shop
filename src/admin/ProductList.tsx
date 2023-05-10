@@ -20,7 +20,9 @@ function ProductList({ setApp, callback }: any) {
       });
     })
   }
-  const removeProduct = (product: any) => {
+  const removeProduct = (event: React.MouseEvent<HTMLAnchorElement>, product: any) => {
+    event.preventDefault();
+    
     setApp({
       modal: 'delete-product',
       modalText: `Удаление товара "${product.name}"`,
@@ -47,7 +49,7 @@ function ProductList({ setApp, callback }: any) {
               <h3>Категория: {product.category.name}</h3>
               <a href={'/product/edit/' + product.id}>Редактировать</a>
               <br />
-              <a onClick={() => removeProduct(product)} href="#">Удалить</a>
+              <a onClick={(event: React.MouseEvent<HTMLAnchorElement>) => removeProduct(event, product)} href="#">Удалить</a>
               <hr />
             </section>
           ))

@@ -6,11 +6,17 @@ export default function ({ children }: any) {
 
   return (
     <div className="container">
-      <p className="ms-4 mt-4">
-      <a href="#" onClick={() => navigate(-1)}>BACK</a>
-      </p>
+      <div style={{
+        width: '35%'
+      }} className="mt-4 d-flex justify-content-between">
+        <a href="#" onClick={() => navigate(-1)}>Назад</a>
+        <a href="/">Главная</a>
+        <a href="/product">Товары</a>
+        <a href="/cart">Корзина</a>
+        <a href="/admin">Категории</a>
+      </div>
       <div className="mb-5"></div>
-      { children }
+      {children}
     </div>
   )
 }

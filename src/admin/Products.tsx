@@ -17,9 +17,15 @@ function Products({ modalData, modalText }: any) {
     }
   }
 
-  return <>
-    <h1>Products</h1>
-    <Modal name="delete-product">
+  return (
+    <>
+      <div className="d-flex justify-content-between mb-4">
+        <h1>Products</h1>
+        <p className="mb-2 pt-3" >
+          <a href="/product/edit">Добавить товар</a>
+        </p>
+      </div>
+      <Modal name="delete-product">
         <p className="category-title" >{modalText}</p>
         <button
           onClick={removeProduct}
@@ -32,11 +38,11 @@ function Products({ modalData, modalText }: any) {
           Удалить
         </button>
       </Modal>
-    <a href="/product/edit">Добавить товар</a>
-    <div className="product__list">
-      <ProductList callback={handleCallback} />
-    </div>
-  </>
+      <div className="product__list">
+        <ProductList callback={handleCallback} />
+      </div>
+    </>
+  )
 }
 
 const mapStateToProps = (state: any) => ({

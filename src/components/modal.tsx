@@ -3,7 +3,9 @@ import { setApp } from "../store/app/app.actions";
 import { connect } from "react-redux";
 
 function Modal ({ name, children, setApp, modal }: any) {
-  const closeModal = () => {    
+  const closeModal = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+        
     setApp({
       modal: false,
       modalData: null
