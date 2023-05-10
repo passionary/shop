@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FilterOption from "./FilterOption";
-import axios from "@/axios";
+import axios from "axios-instance";
 
 export default function ({ setProducts }: any) {
   const [categories, setCategories] = useState<any>(null);

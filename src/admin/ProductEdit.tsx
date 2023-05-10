@@ -3,7 +3,7 @@ import { setApp } from "../store/app/app.actions";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { TreeSelect } from 'antd';
-import axios from "@/axios";
+import axios from "axios-instance";
 
 function Products({ setApp }: any) {
   const [categories, setCategories] = useState([]);

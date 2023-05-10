@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { setApp } from "../store/app/app.actions";
 import { connect } from "react-redux";
-import axios from "@/axios";
+import axios from "axios-instance";
 
 function ProductList({ setApp, callback }: any) {
   const [products, setProducts] = useState([]);

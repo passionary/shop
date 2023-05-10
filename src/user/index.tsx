@@ -3,7 +3,7 @@ import { setApp } from "../store/app/app.actions";
 import { connect } from "react-redux";
 import Filter from "../components/Filter";
 import ProductList from "./ProductList";
-import axios from "@/axios";
+import axios from "axios-instance";
 
 function Products({}: any) {
   const [products, setProducts] = useState([]);

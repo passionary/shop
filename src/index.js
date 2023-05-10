@@ -14,7 +14,6 @@ import store from './store/saga.root';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import NavWrapper from './components/nav';
-import BasketWrapper from './components/BasketWrapper';
 import Basket from './user/Basket';
 import Toast from './components/Toast';
 
@@ -35,18 +34,14 @@ const router = createBrowserRouter([
     path: "/cart",
     element:
       <NavWrapper>
-        <BasketWrapper>
-          <Basket />
-        </BasketWrapper>
+        <Basket />
       </NavWrapper>,
   },
   {
     path: "/",
     element:
       <NavWrapper>
-        <BasketWrapper>
-          <UserIndex />
-        </BasketWrapper>
+        <UserIndex />
       </NavWrapper>,
   },
 ]);

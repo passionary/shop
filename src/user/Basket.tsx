@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "@/axios";
+import axios from "axios-instance";
 import { connect } from "react-redux";
 import Cookies from "universal-cookie";
 import { setApp } from "../store/app/app.actions";

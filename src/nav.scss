@@ -1,0 +1,27 @@
+.nav {
+  &__cart {
+    position: relative;
+    text-decoration: none;
+
+    &-image {
+      padding: 0 9px;
+    }
+
+    &-count {
+      width: 18px;
+      height: 18px;
+      font-size: 13px;
+      border-radius: 50%;
+      background: rgb(58, 58, 145);
+      right: 0;
+      top: 10px;
+      color: #fff;
+      position: absolute;
+
+      p {
+        margin-left: 6px;
+        margin-top: -1px;
+      }
+    }
+  }
+}

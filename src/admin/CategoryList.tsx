@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Category from './Category';
-import axios from '@/axios';
+import axios from "axios-instance";
 import { connect } from 'react-redux';
 import { setApp } from '../store/app/app.actions';
 

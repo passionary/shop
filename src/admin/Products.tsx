@@ -21,9 +21,12 @@ function Products({ modalData, modalText }: any) {
     <>
       <div className="d-flex justify-content-between mb-4">
         <h1>Products</h1>
-        <p className="mb-2 pt-3" >
+        {/* <p className="mb-2 pt-3" >
           <a href="/product/edit">Добавить товар</a>
-        </p>
+        </p> */}
+        <div className="css-modal-target-container">
+          <a href="/product/edit" className="css-modal-open">Добавить товар</a>
+        </div>
       </div>
       <Modal name="delete-product">
         <p className="category-title" >{modalText}</p>
