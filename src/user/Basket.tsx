@@ -58,8 +58,8 @@ function Basket({ basket, message, setApp }: any) {
         console.log(res.data, 'PURCHASE RESPONSE');
 
         if (!res.data.errors) {
-          setApp({ 
-            message: res.data.message, 
+          setApp({
+            message: res.data.message,
             messageStatus: 'Message',
           });
           cookies.remove('jwt_token');
@@ -69,8 +69,8 @@ function Basket({ basket, message, setApp }: any) {
 
           setApp({
             basket,
-            message: error, 
-            messageStatus: 'ERROR' 
+            message: error,
+            messageStatus: 'ERROR'
           });
         }
       })
@@ -93,10 +93,11 @@ function Basket({ basket, message, setApp }: any) {
 
           return (
             <div key={b.id}>
-              <h1>{b.name}</h1>
+              <h2 className="mb-3">{b.name}</h2>
               <p>Количество: {b.quantity}</p>
               <p>Стоимость: {b.price} x {b.quantity} шт = {b.price * b.quantity} тенге</p>
               <input type="hidden" name="products[]" value={JSON.stringify(b)} />
+              <hr />
             </div>
           )
         })
@@ -107,40 +108,49 @@ function Basket({ basket, message, setApp }: any) {
     setTimeout(() => {
       console.log(total.current, 'TOTAL CURRENT');
     }, 1000)
-    
+
     if (total.current) {
       return (
-        <p>
-          Общая стоимость: {total.current}
-        </p>
+        <h3 className="text-end">
+          Общая стоимость: {total.current} тенге
+        </h3>
       )
     }
   }
   return (
-    <div className="container w-25">
-      <h1>Basket</h1>
+    <div className="pb-5">
+      <h1 className="mb-5 text-end">Товары</h1>
 
       <form id="basket-form" onSubmit={purchaseHandler}>
-        <div className="form-control mb-3">
-          <label htmlFor="name">Имя</label>
-          <input id="name" name="name" type="text" placeholder="Введите имя" />
+        <div className="d-flex justify-content-between">
+          <div className="form-cart pt-2 col-5">
+            <div className="form-control px-4 pb-4 pt-3 mb-4">
+              <label className="mb-2" htmlFor="name">Имя</label>
+              <br />
+              <input className="w-100" id="name" name="name" type="text" placeholder="Введите имя" />
+            </div>
+            <div className="form-control px-4 pb-4 pt-3 mb-4">
+              <label className="mb-2" htmlFor="name">Телефон</label>
+              <br />
+              <input className="w-100" id="name" name="phone" type="text" placeholder="Введите телефон" />
+            </div>
+            <div className="form-control px-4 pb-4 pt-3 mb-4">
+              <label className="mb-2" htmlFor="email">Почта</label>
+              <br />
+              <input className="w-100" id="email" name="email" type="email" placeholder="Введите почту" />
+            </div>
+            <div className="form-control px-4 pb-4 pt-3 mb-4">
+              <label className="mb-2" htmlFor="address">Адрес</label>
+              <br />
+              <input className="w-100" id="address" name="address" type="text" placeholder="Введите адрес" />
+            </div>
+            <input className="app-btn" type="submit" value="Купить" />
+          </div>
+          <div className="cart-info col-5">
+            {renderCart()}
+            {renderAmount()}
+          </div>
         </div>
-        <div className="form-control mb-3">
-          <label htmlFor="name">Телефон</label>
-          <input id="name" name="phone" type="text" placeholder="Введите телефон" />
-        </div>
-        <div className="form-control mb-3">
-          <label htmlFor="email">Почта</label>
-          <input id="email" name="email" type="email" placeholder="Введите почту" />
-        </div>
-        <div className="form-control mb-3">
-          <label htmlFor="address">Адрес</label>
-          <input id="address" name="address" type="text" placeholder="Введите адрес" />
-        </div>
-        {renderCart()}
-        {renderAmount()}
-
-        <input type="submit" value="Купить" />
       </form>
     </div>
   )

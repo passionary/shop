@@ -12,7 +12,7 @@ const alg = 'HS256';
 function Products({ products, basket, setApp }: any) {
   const cookies = new Cookies();
   const [quantity, setQuantity] = useState<any>({});
-  
+
   const addToBasket = async (product: any) => {
     let jwt: string;
     let basket = [] as any[];
@@ -22,18 +22,18 @@ function Products({ products, basket, setApp }: any) {
       let { payload } = await jose.jwtVerify(token, secret) as any || {};
 
       if (payload) {
-        let { 
+        let {
           basket: basketArray,
           exp
         } = payload;
         basket = basketArray || [];
-        
-        if(basket) {
+
+        if (basket) {
           basket = basket.concat(product.id);
           payload = { basket }
         }
         console.log(payload, 'UPDATE JWT PAYLOAD');
-        
+
         jwt = await new jose.SignJWT(payload)
           .setProtectedHeader({ alg })
           .setIssuedAt()
@@ -47,7 +47,7 @@ function Products({ products, basket, setApp }: any) {
         });
 
         setApp({ basket })
-        
+
         return;
       }
     } catch (error) {
@@ -66,7 +66,7 @@ function Products({ products, basket, setApp }: any) {
     let { exp, payload } = await jose.jwtVerify(jwt, secret) as any || {};
 
     console.log(payload, 'CHECK NEW PAYLOAD');
-    
+
     setApp({ basket })
     cookies.set('jwt_token', jwt, {
       expires: new Date(exp * 1000)
@@ -82,20 +82,20 @@ function Products({ products, basket, setApp }: any) {
       let { payload } = await jose.jwtVerify(token, secret) as any || {};
 
       if (payload) {
-        let { 
+        let {
           basket: basketArray,
           exp
         } = payload;
         basket = basketArray || [];
-        
-        if(basket.length) {
+
+        if (basket.length) {
           const index = basket.findIndex((b: any) => b == product.id);
 
           basket.splice(index, 1);
           payload = { basket }
         }
         console.log(payload, 'UPDATE JWT PAYLOAD');
-        
+
         jwt = await new jose.SignJWT(payload)
           .setProtectedHeader({ alg })
           .setIssuedAt()
@@ -109,7 +109,7 @@ function Products({ products, basket, setApp }: any) {
         });
 
         setApp({ basket })
-        
+
         return;
       }
     } catch (error) {
@@ -135,27 +135,30 @@ function Products({ products, basket, setApp }: any) {
     setQuantities(basket);
   }, [basket]);
 
-  return <>
+  return <div className="d-flex justify-content-between flex-wrap">
     {
       products
       &&
       products.map((product: any) => (
-        <section key={product.id}>
-          <h3>Название: {product.name}</h3>
-          <h3>Цена: {product.price}</h3>
-          <h3>Количество: {quantity && quantity[product.id]}</h3>
-          <h3>Категория: {product.category.name}</h3>
-          <button onClick={() => addToBasket(product)} >Добавить в корзину</button>
-          {
-            quantity[product.id] > 0
-            &&
-            <button onClick={() => removeFromBasket(product)} >Удалить</button>
-          }
-          <hr />
-        </section>
+        <div style={{
+          width: "47%"
+        }} className="card p-0 mb-3" key={product.id}>
+          <div className="card-header">
+            <div className="card-title">
+              <h3>Название: {product.name}</h3>
+            </div>
+          </div>
+          <div className="card-body">
+            <h3>Цена: {product.price}</h3>
+            <h3>Количество: {quantity && quantity[product.id]}</h3>
+            <h3 className="mb-3">Категория: {product.category.name}</h3>
+            <button className="app-btn" onClick={() => addToBasket(product)} >Добавить в корзину</button>
+              <button className="app-btn btn__delete" onClick={() => removeFromBasket(product)} >Удалить</button>
+          </div>
+        </div>
       ))
     }
-  </>
+  </div>
 }
 
 const mapStateToProps = (state: any) => ({

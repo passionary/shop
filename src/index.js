@@ -19,7 +19,7 @@ import Toast from './components/Toast';
 
 const router = createBrowserRouter([
   {
-    path: "/admin",
+    path: "/categories",
     element: <NavWrapper><Index /></NavWrapper>,
   },
   {

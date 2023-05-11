@@ -10,19 +10,17 @@ function ProductList({ setApp, callback }: any) {
     let url = `products/delete/${id}`;
 
     axios.post(url)
-    .then(res => {
-      setProducts(products => products.filter((p: any) => p.id != product.id));
+      .then(res => {
+        setProducts(products => products.filter((p: any) => p.id != product.id));
 
-      setApp({
-        modal: false,
-        message: res.data.message,
-        messageStatus: 'Message'
-      });
-    })
+        setApp({
+          modal: false,
+          message: res.data.message,
+          messageStatus: 'Message'
+        });
+      })
   }
-  const removeProduct = (event: React.MouseEvent<HTMLAnchorElement>, product: any) => {
-    event.preventDefault();
-
+  const removeProduct = (product: any) => {
     setApp({
       modal: 'delete-product',
       modalText: `Удаление товара "${product.name}"`,
@@ -43,15 +41,27 @@ function ProductList({ setApp, callback }: any) {
       if (products.length) {
         return (
           products.map((product: any) => (
-            <section key={product.id}>
-              <h3>Название: {product.name}</h3>
-              <h3>Цена: {product.price}</h3>
-              <h3>Категория: {product.category.name}</h3>
-              <a href={'/product/edit/' + product.id}>Редактировать</a>
-              <br />
-              <a onClick={(event: React.MouseEvent<HTMLAnchorElement>) => removeProduct(event, product)} href="#">Удалить</a>
-              <hr />
-            </section>
+            <div style={{
+              width: "47%"
+            }} className="card p-0 mb-5" key={product.id}>
+              <div className="card-header">
+                <div className="card-title">
+                  <h3>Название: {product.name}</h3>
+                </div>
+              </div>
+              <div className="card-body">
+                <h3>Цена: {product.price}</h3>
+                <h3 className="mb-3">Категория: {product.category.name}</h3>
+                <button style={{
+                  width: '200px'
+                }} className="app-btn">
+                  <a style={{
+                    textDecoration: 'none'
+                  }} href={'/product/edit/' + product.id}>Редактировать</a>
+                </button>
+                <button className="app-btn" onClick={() => removeProduct(product)}>Удалить</button>
+              </div>
+            </div>
           ))
         )
       }
@@ -59,8 +69,8 @@ function ProductList({ setApp, callback }: any) {
   }
 
   return <>
-    <div className="product__list">
-      { renderProducts() }
+    <div className="product__list d-flex justify-content-between flex-wrap">
+      {renderProducts()}
     </div>
   </>
 }

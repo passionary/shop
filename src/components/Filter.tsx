@@ -13,7 +13,11 @@ export default function ({ setProducts }: any) {
       })
   }, []);
   return (
-    <div className="container w-25">
+    <div>
+      <h2 style={{
+        marginLeft: '-22px',
+        marginBottom: '24px'
+      }}>Фильтр</h2>
       {
       categories
       &&

@@ -5,7 +5,7 @@ import Filter from "../components/Filter";
 import ProductList from "./ProductList";
 import axios from "axios-instance";
 
-function Products({}: any) {
+function Products({ }: any) {
   const [products, setProducts] = useState([]);
   const setProductsHandler = (array: any) => {
     console.log(array, 'ARRAY PRODUCTS');
@@ -19,16 +19,16 @@ function Products({}: any) {
         setProducts(res.data);
       })
   }, []);
-  return <>
-    <h1>Shop</h1>
-
-    <div className="filter">
-      <Filter setProducts={setProductsHandler} />
+  return (
+    <div className="row">
+      <div className="col-3 filter">
+        <Filter setProducts={setProductsHandler} />
+      </div>
+      <div className="col product__list mt-1">
+        <ProductList products={products} />
+      </div>
     </div>
-    <div className="product__list mt-5">
-      <ProductList products={products} />
-    </div>
-  </>
+  )
 }
 
 const mapStateToProps = (state: any) => ({

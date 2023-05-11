@@ -20,10 +20,7 @@ function Products({ modalData, modalText }: any) {
   return (
     <>
       <div className="d-flex justify-content-between mb-4">
-        <h1>Products</h1>
-        {/* <p className="mb-2 pt-3" >
-          <a href="/product/edit">Добавить товар</a>
-        </p> */}
+        <h1>Товары</h1>
         <div className="css-modal-target-container">
           <a href="/product/edit" className="css-modal-open">Добавить товар</a>
         </div>
