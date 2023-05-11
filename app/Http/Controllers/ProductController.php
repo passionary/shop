@@ -35,7 +35,7 @@ class ProductController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'parent_id' => "required",
-            'name' => "required|unique:products,name," . (($product->id) ? $product->id : 'NULL'),
+            'name' => "required",
             'price' => "required",
         ]);
         $response = [];
